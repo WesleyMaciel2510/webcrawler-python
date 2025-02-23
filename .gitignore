@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual Environments
+venv/
+env/
+.venv/
+.env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+*.coverage
+.coverage.*
+nosetests.xml
+test-results.xml
+*.hypothesis/
+
+# pyenv
+.python-version
+
+# mypy
+.mypy_cache/
+
+# IDE / editor directories
+.vscode/
+.idea/
+*.swp
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# MacOS files
+.DS_Store
+
+# Log files
+*.log
+
+# Environment variables
+.env
+
+# Libs files
+/lib/
+
+# Scripts Files
+/Scripts/
