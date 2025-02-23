@@ -6,6 +6,8 @@ from app.routes.document_routes import router as document_router
 app = FastAPI()
 
 app.include_router(movie_router, prefix="/api/movies", tags=["movies"])
+app.include_router(movie_router, prefix="/api/movies/searchByName", tags=["movies"])
+
 app.include_router(reporter_router, prefix="/api/reporters", tags=["reporters"])
 app.include_router(document_router, prefix="/api/documents", tags=["documents"])
 

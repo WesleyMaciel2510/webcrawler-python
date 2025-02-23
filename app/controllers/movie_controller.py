@@ -31,17 +31,24 @@ async def get_movies(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch movies: {str(e)}")
 
-@router.get("/searchByName", response_model=MovieResponse)
+@router.get("/movies/searchByName", response_model=MovieResponse)
 async def get_movies_by_name(
-    name: str,
-    page: int = Query(1, ge=1),
-    res_per_page: int = Query(30, ge=1),
+    name: Optional[str] = Query(None, description="Name of the movie to search for"),
+    page: int = Query(1, ge=1, description="Page number for pagination"),
+    res_per_page: int = Query(30, ge=1, description="Number of results per page"),
 ):
     try:
+        # Validate the 'name' parameter
         if not name:
-            raise HTTPException(status_code=400, detail="Missing or invalid 'name' query parameter")
+            raise HTTPException(
+                status_code=400,
+                detail="Missing or invalid 'name' query parameter",
+            )
 
+        # Call the service to search for movies
         result = movie_service.search_movies_by_name(name, page, res_per_page)
+
+        # Prepare the response
         return {
             "success": True,
             "count": len(result["movies"]),
@@ -51,5 +58,9 @@ async def get_movies_by_name(
             "total_pages": (result["total"] + res_per_page - 1) // res_per_page,
             "data": result["movies"],
         }
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to search movies: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to search movies: {str(e)}",
+        )
